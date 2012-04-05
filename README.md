@@ -7,11 +7,12 @@ Communication with command between processes.
     #in receiver process(pid: 9999)
     require 'process_command'
     ProcessCommand::Receiver.init
-    ProcessCommand.on(:ok) {p "ok"}
+    ProcessCommand.on(:pause) { p "server paused" }
+    ProcessCommand.on(:resume) { p "server resumed" }
 
     #in sender process
     require 'process_command'
-    ProcessCommand.send :ok, 9999
+    ProcessCommand.send :pause, 9999
 
 ## Customization
 
