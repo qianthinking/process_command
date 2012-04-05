@@ -4,14 +4,12 @@ Communication with command between processes.
 
 ## Usage
 
-* in receiver process(pid: 9999)
-
+    #in receiver process(pid: 9999)
     require 'process_command'
     ProcessCommand::Receiver.init
     ProcessCommand.on(:ok) {p "ok"}
 
-* in sender process
-
+    #in sender process
     require 'process_command'
     ProcessCommand.send :ok, 9999
 
