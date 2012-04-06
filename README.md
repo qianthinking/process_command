@@ -31,6 +31,7 @@ For logger
     ProcessCommand.logger = ProcessCommand::Logger
 
 For mode socket, default path /tmp, you can change it
+
     ProcessCommand::Socket::Setting.set_path(path)
 
 For mode signal, default signals are USR1, USR2, HUP, you can change them both in sender and receiver
