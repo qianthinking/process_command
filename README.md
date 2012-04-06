@@ -1,12 +1,12 @@
 # ProcessCommand
 
-Communication with command between processes.
+Interprocess communication with command for ruby
 
 ## Usage
 
     #in receiver process(pid: 9999)
     require 'process_command'
-    ProcessCommand::Receiver.init
+    ProcessCommand.init_receiver
     ProcessCommand.on(:pause) { p "server paused" }
     ProcessCommand.on(:resume) { p "server resumed" }
 
@@ -14,9 +14,26 @@ Communication with command between processes.
     require 'process_command'
     ProcessCommand.send :pause, 9999
 
+## Mode
+
+* Unix socket (default)
+
+    ProcessCommand.mode = :socket
+
+* Signal
+
+    ProcessCommand.mode = :signal
+
 ## Customization
 
-Default use signals USR1, USR2, HUP, you can customize them both in sender and receiver
+For logger
 
-    ProcessCommand::Setting.set_bit_signals(bit0_signal, bit1_signal)
-    ProcessCommand::Setting.set_stop_signal(stop_signal)
+    ProcessCommand.logger = ProcessCommand::Logger
+
+For mode socket, default path /tmp, you can change it
+    ProcessCommand::Socket::Setting.set_path(path)
+
+For mode signal, default signals are USR1, USR2, HUP, you can change them both in sender and receiver
+
+    ProcessCommand::Signal::Setting.set_bits(bit0_signal, bit1_signal)
+    ProcessCommand::Signal::Setting.set_control(control_signal)
